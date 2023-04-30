@@ -1,8 +1,11 @@
 package manager;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HelperBase {
 
@@ -43,5 +46,15 @@ public class HelperBase {
     public void openLoginRegistrationForm(){
 //        wd.findElement(By.xpath("//a[@href='/login']")).click();
         click(By.xpath("//a[@href='/login']"));
+    }
+
+    public boolean isAlertTextCorrect(String text) {
+        Alert alert = new WebDriverWait(wd, 15).until(ExpectedConditions.alertIsPresent());
+        if (alert == null)
+            return false;
+        else {
+            wd.switchTo().alert();
+        }
+        return alert.getText().contains(text);
     }
 }

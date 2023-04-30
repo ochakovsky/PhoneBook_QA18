@@ -90,8 +90,11 @@ public class RegistrationTests extends BaseTest {
 //        3. submit by click registration button
         app.getUser().submitRegistration();
 //        wd.findElement(By.xpath("//button[2]")).click();
+        Assert.assertTrue(app.getUser().isAlertTextCorrect("Wrong email or password"));
+        app.getUser().isAlertPresent();
 //        4. assert
 //        Assert.assertTrue(wd.findElement(By.xpath("//a[text()='ADD']")).getText().equals("ADD"));
+        Assert.assertFalse(app.getUser().isLogged());
     }
 
     @AfterMethod
