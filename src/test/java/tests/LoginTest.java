@@ -4,7 +4,7 @@ import models.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LoginTest extends BaseTest {
+public class LoginTest extends TestBase {
     @Test
     public void loginPositiveTest(){
 
@@ -33,6 +33,11 @@ public class LoginTest extends BaseTest {
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(user);
         app.getUser().submitLogin();
+        Assert.assertTrue(app.getUser().isAlertTextCorrect("Wrong email or password"));
+        app.getUser().isAlertPresent();
+
     }
+
+
 
 }

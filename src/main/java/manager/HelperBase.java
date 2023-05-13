@@ -1,11 +1,12 @@
 package manager;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+import java.io.IOException;
 
 public class HelperBase {
 
@@ -56,5 +57,14 @@ public class HelperBase {
             wd.switchTo().alert();
         }
         return alert.getText().contains(text);
+    }
+    public void takeScreenShot(String link){
+        File tmp = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
+        File screenShot = new File(link);
+        try {
+            Files.copy(tmp, screenShot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
